@@ -65,44 +65,45 @@ def win_check(board, mark):
     return False
   
 def replay():
-  playAgain = input("Do you want to play again? (Y/N): ")
+  playAgain = input("Do you want to play again? (Y = Yes, other input = No): ")
   if playAgain.upper() == 'Y':
     return True
-  if playAgain.upper() == 'N':
-    return False
+  else:
+    return False   
   
-  if __name__ = "__main__":
-    print("Starting Tic-Tac-Toe")
-    # Keep track of player
-    playerTurn = 1
-    players=player_input()
-    # Make board (# is empty)
-    board = ['#'] * 10
-    while True:
-      game_on=full_board_check(board)
-      while not game_on:
-        # Player picks location
-        position = player_choice(board)
-        # Player 2's turn if playerTurn is even, vice versa
-        if playerTurn % 2 == 0:
-          marker = players[1]
-        else:
-          marker = players[0]
-        # Place marker
-        place_marker(board, marker, int(position))
-        # View board
-        display_board(board)
-        # Check for a win
-        if win_check(board, marker):
-          print(players[playerTurn % 2] + " won!")
-          break
-        # Advance turn
-        playerTurn += 1
-        game_on = full_board_check(board)
-      if not replay():
-        break
+if __name__ == "__main__":
+  print("Starting Tic-Tac-Toe")
+  # Keep track of player
+  playerTurn = 1
+  players=player_input()
+  # Make board (# is empty)
+  board = ['#'] * 10
+  while True:
+    game_on=full_board_check(board)
+    while not game_on:
+      # Player picks location
+      print("It's " + players[not playerTurn % 2] + "'s turn!")
+      position = player_choice(board)
+      # Player 2's turn if playerTurn is even, vice versa
+      if playerTurn % 2 == 0:
+        marker = players[1]
       else:
-        playerTurn = 1
-        players=player_input()
-        # Make board (# is empty)
-        board = ['#'] * 10
+        marker = players[0]
+      # Place marker
+      place_marker(board, marker, int(position))
+      # View board
+      display_board(board)
+      # Advance turn
+      playerTurn += 1
+      # Check for a win
+      if win_check(board, marker):
+        print(players[playerTurn % 2] + " won!")
+        break
+      game_on = full_board_check(board)
+    if not replay():
+      break
+    else:
+      playerTurn = 1
+      players=player_input()
+      # Make board (# is empty)
+      board = ['#'] * 10
